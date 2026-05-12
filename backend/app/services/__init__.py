@@ -4,7 +4,7 @@ from app.services.auth_service import (
     create_access_token,
     decode_access_token,
 )
-from app.services import user_service
+from app.services import user_service, chat_service, ollama_service, model_catalog
 
 __all__ = [
     "verify_password",
@@ -12,4 +12,7 @@ __all__ = [
     "create_access_token",
     "decode_access_token",
     "user_service",
+    "chat_service",
+    "ollama_service",
+    "model_catalog",
 ]

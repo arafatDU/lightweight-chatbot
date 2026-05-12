@@ -10,7 +10,9 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
-    # Ollama
+    # Ollama (Colab GPU)
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+    DEFAULT_MODEL: str = "llama3.2:1b"
 
     # App
     APP_NAME: str = "LightChat API"
