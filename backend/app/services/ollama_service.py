@@ -72,12 +72,29 @@ class OllamaService:
                         "stream": False
                     }
                 )
+                
+                # If model is not found, try pulling it once
+                if response.status_code == 404:
+                    print(f"Model '{model}' not found. Attempting to pull...")
+                    pull_result = await self.pull_model(model)
+                    if pull_result.get("status") == "success":
+                        print(f"Model '{model}' pulled successfully. Retrying chat...")
+                        # Retry the chat request once after successful pull
+                        response = await client.post(
+                            f"{self.base_url}/api/chat",
+                            json={
+                                "model": model,
+                                "messages": messages,
+                                "stream": False
+                            }
+                        )
+                
                 response.raise_for_status()
                 data = response.json()
                 return data["message"]["content"]
             except httpx.HTTPStatusError as e:
                 if e.response.status_code == 404:
-                    raise Exception(f"Model '{model}' not found. Please pull it first.")
+                    raise Exception(f"Model '{model}' not found even after pulling. Please check if the name is correct.")
                 raise Exception(f"Ollama API error: {str(e)}")
             except Exception as e:
                 raise Exception(f"Failed to get chat response: {str(e)}")
