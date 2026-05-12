@@ -6,7 +6,20 @@ from app.schemas.user import (
     UserResponse,
     AuthResponse,
 )
-
+from app.schemas.conversation import (
+    MessageCreate,
+    MessageResponse,
+    ConversationCreate,
+    ConversationResponse,
+    ChatRequest,
+    ChatResponse,
+    ModelInfo,
+    PullModelRequest,
+    PullModelResponse,
+    ModelsListResponse,
+    OllamaUrlUpdate,
+    OllamaUrlResponse,
+)
 
 __all__ = [
     "UserCreate",
@@ -15,4 +28,16 @@ __all__ = [
     "TokenData",
     "UserResponse",
     "AuthResponse",
+    "MessageCreate",
+    "MessageResponse",
+    "ConversationCreate",
+    "ConversationResponse",
+    "ChatRequest",
+    "ChatResponse",
+    "ModelInfo",
+    "PullModelRequest",
+    "PullModelResponse",
+    "ModelsListResponse",
+    "OllamaUrlUpdate",
+    "OllamaUrlResponse",
 ]

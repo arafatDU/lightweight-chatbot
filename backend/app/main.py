@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.database import engine
 from app.database.init_db import init_db
-from app.api import auth_router
+from app.api import auth_router, chat_router
 
 try:
     print(f"Connecting to database: {settings.DATABASE_URL.split('@')[-1]}") # Log host part only
@@ -24,6 +24,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(chat_router)
 
 
 @app.get("/health")
