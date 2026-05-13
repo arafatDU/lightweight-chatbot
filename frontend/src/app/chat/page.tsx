@@ -54,12 +54,17 @@ export default function ChatPage() {
 
   const selectConversation = useCallback(async (id: number) => {
     setActiveConversationId(id);
+    setMessages([]);
     setError("");
     try {
       const conv = await api.chat.getConversation(id);
-      setMessages(conv.messages);
+      // Guard: ignore result if user switched away before fetch completed
+      setActiveConversationId((current) => {
+        if (current === id) setMessages(conv.messages);
+        return current;
+      });
     } catch {
-      setMessages([]);
+      // messages already cleared above
     }
   }, []);
 
